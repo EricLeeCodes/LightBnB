@@ -17,7 +17,7 @@ const users = require("./json/users.json");
  * @param {String} email The email of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithEmail = (options, email) => {
+const getUserWithEmail = (email) => {
   return pool
     .query('SELECT users.* FROM users WHERE email = $1', [email])
     .then((result) => {
@@ -34,7 +34,7 @@ const getUserWithEmail = (options, email) => {
  * @param {string} id The id of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithId = (options, id) => {
+const getUserWithId = (id) => {
   return pool
     .query('SELECT users.* FROM users WHERE id = $1', [id])
     .then((result) => {
@@ -51,12 +51,12 @@ const getUserWithId = (options, id) => {
  * @param {{name: string, password: string, email: string}} user
  * @return {Promise<{}>} A promise to the user.
  */
-const addUser = (name, email, password) => {
+const addUser = (user) => {
+  console.log('user', user);
   return pool
-    .query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING *', [name, email, password])
+    .query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING *', [user.name, user.email, user.password])
     .then((result) => {
       console.log("User created!");
-      return result.rows;
     })
     .catch((err) => {
       console.log(err.message);
@@ -90,7 +90,7 @@ const getAllReservations = function(guest_id, limit = 10) {
 //   return Promise.resolve(limitedProperties);
 // };
 
-const getAllProperties = (options, limit = 10) => {
+const getAllProperties = (limit = 10) => {
   return pool
     .query(`SELECT * FROM properties LIMIT $1`, [limit])
     .then((result) => {
