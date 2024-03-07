@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS reservations CASCADE;
 DROP TABLE IF EXISTS property_reviews CASCADE;
+DROP TABLE IF EXISTS reservations CASCADE;
 DROP TABLE IF EXISTS properties CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 
 CREATE TABLE users (
@@ -20,7 +20,7 @@ CREATE TABLE properties(
   cover_photo_url VARCHAR(255) NOT NULL,
   cost_per_night INTEGER NOT NULL DEFAULT 0,
   parking_spaces INTEGER NOT NULL DEFAULT 0,
-  number_of_bathroms INTEGER NOT NULL DEFAULT 0,
+  number_of_bathrooms INTEGER NOT NULL DEFAULT 0,
   number_of_bedrooms INTEGER NOT NULL DEFAULT 0, 
   country VARCHAR(255) NOT NULL,
   street VARCHAR(255) NOT NULL,
